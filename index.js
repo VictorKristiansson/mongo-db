@@ -14,3 +14,10 @@ const userSchema = new mongoose.Schema({
   last_name: String,
   email: String,
 });
+
+const User = mongoose.model("User", userSchema);
+
+app.get("/users", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
