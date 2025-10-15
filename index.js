@@ -38,6 +38,16 @@ app.put("/users/:id", async (req, res) => {
   res.json(updatedUser);
 });
 
+app.delete("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedUser = await User.findByIdAndDelete(id);
+
+  if (!deletedUser) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.json({ message: "User deleted successfully" });
+});
+
 app.listen(3000, () => {
   console.log(`Server is running on port 3000!`);
 });
